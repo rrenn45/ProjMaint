@@ -20,9 +20,9 @@ export default function RootLayout({
       <body className={inter.className}>
         <div className="flex h-screen">
         <div className="flex flex-col justify-around items-center h-full border p-4">
-          <Link href="/" className="hover:font-bold">Home</Link>
-          <Link href='/work_orders' className="hover:font-bold m-2 p-4">Work Orders</Link>
-          <Link href="/assets" className="hover:font-bold">Assets</Link>
+          <Link href="/" className="hover:text-blue-700">Home</Link>
+          <Link href='/work_orders' className="hover:text-blue-700 m-2 p-4">Work Orders</Link>
+          <Link href="/assets" className="hover:text-blue-700">Assets</Link>
         </div>
         {children}
         </div>

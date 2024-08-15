@@ -9,27 +9,45 @@ import {
   } from "@/components/ui/table"
 
   import Link from "next/link"
+  import { neon } from "@neondatabase/serverless";
+  import { revalidatePath } from "next/cache";
+
+  async function getData() {
+    const sql = neon(process.env.DATABASE_URL);
+    const response = await sql`SELECT * FROM workorders`;
+    revalidatePath("/work_orders")
+    return response
+  }
   
 
-export default function WorkOrderPage(){
-    return (<Table>
+export default async function WorkOrderPage(){
+    const data = await getData()   
+    //console.log(data)
+    const rows = data.map((item) => <TableRow key={item.id}>
+    <TableCell className="font-medium"><Link href="/" className="hover:font-bold text-blue-600">{item.id}</Link></TableCell>
+    <TableCell>{item.description}</TableCell>
+    <TableCell>{item.date}</TableCell>
+    <TableCell>{item.priority}</TableCell>
+    <TableCell className="text-right">{item.asset}</TableCell>
+  </TableRow>)
+
+    return (<div className="flex flex-col border w-full"><div className="flex justify-right border w-full"><Link className="p-2 border bg-orange-200 font-bold rounded m-4" href="/work_orders/create">Create WO</Link></div><Table>
         <TableCaption>A list of your recent work orders.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Work Order</TableHead>
-            <TableHead>Status</TableHead>
+            <TableHead>Description</TableHead>
             <TableHead>Date Created</TableHead>
+            <TableHead>Priority</TableHead>
             <TableHead className="text-right">Asset</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell className="font-medium"><Link href="/" className="hover:font-bold text-blue-600">W001</Link></TableCell>
-            <TableCell>Assigned</TableCell>
-            <TableCell>7/7/2024</TableCell>
-            <TableCell className="text-right">Fuel Gas Compressor B</TableCell>
-          </TableRow>
+          
+          {rows}
+        
         </TableBody>
       </Table>
+      </div>
       )
 }
