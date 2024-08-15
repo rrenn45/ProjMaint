@@ -13,7 +13,7 @@ import {
   import { revalidatePath } from "next/cache";
 
   async function getData() {
-    const sql = neon(process.env.DATABASE_URL);
+    const sql = neon(process.env.DATABASE_URL as string);
     const response = await sql`SELECT * FROM workorders`;
     revalidatePath("/work_orders")
     return response

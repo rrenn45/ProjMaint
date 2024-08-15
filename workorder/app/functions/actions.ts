@@ -11,7 +11,7 @@ type asset = string
 export async function createWorkOrder(formData: FormData){
     //console.log(formData)
     const id = randomUUID()
-    const sql = neon(process.env.DATABASE_URL)
+    const sql = neon(process.env.DATABASE_URL as string)
     const description = formData.get("description")
     const priority = formData.get("priority")
     const asset = formData.get("asset")
@@ -24,7 +24,7 @@ export async function createWorkOrder(formData: FormData){
 }
 
 export async function createAsset(formData: FormData){
-    const sql = neon(process.env.DATABASE_URL)
+    const sql = neon(process.env.DATABASE_URL as string)
     const name = formData.get("name")
     const location = formData.get("location")
     const category = formData.get("class")
