@@ -3,7 +3,7 @@ import Image from "next/image";
 import { neon } from "@neondatabase/serverless";
 
 async function getData(){
-  const sql = neon(process.env.DATABASE_URL);
+  const sql = neon(process.env.DATABASE_URL as string);
   const response = await sql`SELECT * FROM playing_with_neon`
   return response
 }
