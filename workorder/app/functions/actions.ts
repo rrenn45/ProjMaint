@@ -4,9 +4,21 @@ import { neon } from "@neondatabase/serverless"
 import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
 import { randomUUID } from "crypto"
+import { db } from "@/db"
+import { InsertUser, usersTable } from "@/schema"
 
 type asset = string
 
+export async function createUser(data: InsertUser) {
+    await db.insert(usersTable).values(data);
+  }
+
+export async function rawUserData(formData: FormData){
+    //console.log(formData)
+    const user = {name: formData.get('userName') as string, jobFunction: formData.get('jobFunction') as string, email: formData.get('emailAddress') as string}
+    const user2 = {name:'rob', jobFunction: "tech", email: "rob@rob.com"}    
+    await createUser(user)
+}  
 
 export async function createWorkOrder(formData: FormData){
     //console.log(formData)
