@@ -30,7 +30,8 @@ const formSchema = z.object({
   workorder_descript: z.string().min(10, {
     message: "Description must be at least 10 characters.",
   }),
-  work_group:z.string().min(19)
+  work_group:z.string().min(2),
+  impact_category:z.string().min(2),
 })
 
 export function WorkOrderForm() {
@@ -39,7 +40,8 @@ export function WorkOrderForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       workorder_descript: "",
-      work_group:""
+      work_group:"",
+      impact_category:"",
     },
   })
 
@@ -87,6 +89,36 @@ export function WorkOrderForm() {
           <SelectItem value="automation">Automation</SelectItem>
           <SelectItem value="fmm">Facility Maintenance</SelectItem>
           <SelectItem value="laborer">Laborer</SelectItem>
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+              </FormControl>
+              <FormDescription>
+                Work Order Description.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="impact_category"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Impact Category</FormLabel>
+              <FormControl>
+              <Select>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select an impact category" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Impact Categories</SelectLabel>
+          <SelectItem value="environmental">Environmental</SelectItem>
+          <SelectItem value="safety">Safety</SelectItem>
+          <SelectItem value="production">Production</SelectItem>
+          <SelectItem value="regulatory">Regulatory</SelectItem>
+          
         </SelectGroup>
       </SelectContent>
     </Select>
