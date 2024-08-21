@@ -7,6 +7,7 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+  
 
   import Link from "next/link"
   import { neon } from "@neondatabase/serverless";
@@ -29,6 +30,7 @@ export default async function WorkOrderPage(){
     <TableCell>{item.date}</TableCell>
     <TableCell>{item.priority}</TableCell>
     <TableCell className="text-right">{item.asset}</TableCell>
+    <TableCell><Link href={`/work_orders/${item.id}/modify`} className="hover:bg-slate-400 bg-slate-300 rounded p-2">Modify</Link></TableCell>
   </TableRow>)
 
     return (<div className="flex flex-col border w-full"><div className="flex justify-right border w-full"><Link className="p-2 border bg-orange-200 font-bold rounded m-4" href="/work_orders/create">Create WO</Link></div><Table>
