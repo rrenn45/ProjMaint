@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <div className="flex h-screen">
-        <div className="flex flex-col justify-around items-center h-full border p-4">
+        <div className="flex flex-col justify-around items-center h-full border p-4 justify-items-center content-center">
           <Link href="/" className="hover:text-blue-700">Home</Link>
           <Link href='/work_orders' className="hover:text-blue-700 m-2 p-4">Work Orders</Link>
           <Link href="/assets" className="hover:text-blue-700">Assets</Link>

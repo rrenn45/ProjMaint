@@ -14,7 +14,7 @@ import {
 
   async function getData() {
     const sql = neon(process.env.DATABASE_URL as string);
-    const response = await sql`SELECT * FROM workorders`;
+    const response = await sql`SELECT * FROM workorders ORDER BY date DESC`;
     revalidatePath("/work_orders")
     return response
   }
