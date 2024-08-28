@@ -7,7 +7,7 @@ import { PgTimestampString } from 'drizzle-orm/pg-core';
 
 
 const ITEMS_PER_PAGE = 6;
-export async function fetchFilteredInvoices(
+/* export async function fetchFilteredInvoices(
   query: string,
   currentPage: number,
 ) {
@@ -43,7 +43,7 @@ export async function fetchFilteredInvoices(
     console.error('Database Error:', error);
     throw new Error('Failed to fetch invoices.');
   }
-}
+} */
 
 export async function getUserWorkOrders(id: SelectUser['id']): Promise<
   Array<{
