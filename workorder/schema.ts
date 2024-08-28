@@ -5,7 +5,7 @@ export const usersTable = pgTable('users_table', {
   name: text('name').notNull(),
   jobFunction: text('jobFunction').notNull(),
   email: text('email').notNull().unique(),
-  title: text('title').notNull(),
+  
 });
 
 export const workOrderTable = pgTable('work_order_table',{
