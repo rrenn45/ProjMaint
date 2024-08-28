@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache"
 import { randomUUID } from "crypto"
 import { db } from "@/db"
 import { InsertUser, usersTable } from "@/schema"
+import { title } from "process"
 
 type asset = string
 
@@ -15,7 +16,7 @@ export async function createUser(data: InsertUser) {
 
 export async function rawUserData(formData: FormData){
     //console.log(formData)
-    const user = {name: formData.get('userName') as string, jobFunction: formData.get('jobFunction') as string, email: formData.get('emailAddress') as string}
+    const user = {name: formData.get('userName') as string, jobFunction: formData.get('jobFunction') as string, email: formData.get('emailAddress') as string, title: formData.get('title') as string}
     const user2 = {name:'rob', jobFunction: "tech", email: "rob@rob.com"}    
     await createUser(user)
 }  

@@ -14,6 +14,7 @@ export default async function UsersPage(){
             <input type="email" name="emailAddress" placeholder="email"></input>
             <input type="text" name="jobFunction" placeholder="job function"></input>
             <input type="text" name="userName" placeholder="first and last name"></input>
+            <input type="text" name="title" placeholder="job title"></input>
             <button type="submit">Submit New User</button>
         </form>
             {result.map((item) => <p key={item.id}>Name: {item.name}  Function: {item.jobFunction}</p>)}
