@@ -1,0 +1,1 @@
+ALTER TABLE "work_order_table" ADD COLUMN "priority_category" text NOT NULL;

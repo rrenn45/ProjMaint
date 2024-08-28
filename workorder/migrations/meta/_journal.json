@@ -15,6 +15,20 @@
       "when": 1723819294250,
       "tag": "0001_salty_klaw",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1724738571305,
+      "tag": "0002_fantastic_firebird",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1724738879223,
+      "tag": "0003_colossal_umar",
+      "breakpoints": true
     }
   ]
 }

@@ -7,6 +7,8 @@ import {
     TableHeader,
     TableRow,
   } from "@/components/ui/table"
+
+  import WorkOrderSearch from "./work_order_ui/search";
   
 
   import Link from "next/link"
@@ -33,7 +35,9 @@ export default async function WorkOrderPage(){
     <TableCell><Link href={`/work_orders/${item.id}/modify`} className="hover:bg-slate-400 bg-slate-300 rounded p-2">Modify</Link></TableCell>
   </TableRow>)
 
-    return (<div className="flex flex-col border w-full"><div className="flex justify-right border w-full"><Link className="p-2 border bg-orange-200 font-bold rounded m-4" href="/work_orders/create">Create WO</Link></div><Table>
+    return (<div className="flex flex-col border w-full"><div className="flex justify-right border w-full items-center"><Link className="p-2 border bg-orange-200 font-bold rounded m-4" href="/work_orders/create">Create WO</Link>
+    <WorkOrderSearch className="w-full"/>
+    </div><Table>
         <TableCaption>A list of your recent work orders.</TableCaption>
         <TableHeader>
           <TableRow>
