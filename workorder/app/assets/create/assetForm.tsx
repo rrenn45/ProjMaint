@@ -30,7 +30,7 @@ const formSchema = z.object({
   asset_descript: z.string().min(10, {
     message: "Description must be at least 10 characters.",
   }),
-  work_group:z.string().min(2),
+  asset_class:z.string().min(2),
   asset_category:z.string().min(2),
 })
 
@@ -72,7 +72,7 @@ export function AssetForm() {
         />
         <FormField
           control={form.control}
-          name="work_group"
+          name="asset_class"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Asset Class</FormLabel>
