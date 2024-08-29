@@ -40,7 +40,7 @@ export function AssetForm() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       asset_descript: "",
-      work_group:"",
+      asset_class:"",
       asset_category:"",
     },
   })
@@ -75,26 +75,26 @@ export function AssetForm() {
           name="work_group"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Work Group</FormLabel>
+              <FormLabel>Asset Class</FormLabel>
               <FormControl>
               <Select>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select a work group" />
+        <SelectValue placeholder="Select an asset class" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Work Groups</SelectLabel>
-          <SelectItem value="electrician">Electrician</SelectItem>
-          <SelectItem value="mechanic">Mechanic</SelectItem>
-          <SelectItem value="automation">Automation</SelectItem>
-          <SelectItem value="fmm">Facility Maintenance</SelectItem>
-          <SelectItem value="laborer">Laborer</SelectItem>
+          <SelectLabel>Asset Classes</SelectLabel>
+          <SelectItem value="pump">pump</SelectItem>
+          <SelectItem value="compressor">compressor</SelectItem>
+          <SelectItem value="tank">tank</SelectItem>
+          <SelectItem value="pipeline">pipeline</SelectItem>
+          <SelectItem value="facility">facility</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
               </FormControl>
               <FormDescription>
-                Work Order Description.
+                Asset Description.
               </FormDescription>
               <FormMessage />
             </FormItem>

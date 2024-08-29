@@ -14,10 +14,12 @@ import {
   import Link from "next/link"
   import { neon } from "@neondatabase/serverless";
   import { revalidatePath } from "next/cache";
+  import { db } from "@/db";
+import { workOrderTable } from "@/schema";
 
   async function getData() {
-    const sql = neon(process.env.DATABASE_URL as string);
-    const response = await sql`SELECT * FROM workorders ORDER BY date DESC`;
+    
+    const response = await db.select().from(workOrderTable);
     revalidatePath("/work_orders")
     return response
   }
@@ -28,10 +30,11 @@ export default async function WorkOrderPage(){
     //console.log(data)
     const rows = data.map((item) => <TableRow key={item.id}>
     <TableCell className="font-medium"><Link href="/" className="hover:font-bold text-blue-600">{item.id}</Link></TableCell>
-    <TableCell>{item.description}</TableCell>
-    <TableCell>{item.date}</TableCell>
-    <TableCell>{item.priority}</TableCell>
-    <TableCell className="text-right">{item.asset}</TableCell>
+    <TableCell>{item.brief_description}</TableCell>
+    <TableCell>{item.work_order_type}</TableCell>
+    <TableCell>{item.createdAt.toDateString()}</TableCell>
+    <TableCell>{item.priority_category}</TableCell>
+    <TableCell className="text-right">{item.asset_id}</TableCell>
     <TableCell><Link href={`/work_orders/${item.id}/modify`} className="hover:bg-slate-400 bg-slate-300 rounded p-2">Modify</Link></TableCell>
   </TableRow>)
 
@@ -43,6 +46,7 @@ export default async function WorkOrderPage(){
           <TableRow>
             <TableHead className="w-[100px]">Work Order</TableHead>
             <TableHead>Description</TableHead>
+            <TableHead>Work Order Type</TableHead>
             <TableHead>Date Created</TableHead>
             <TableHead>Priority</TableHead>
             <TableHead className="text-right">Asset</TableHead>

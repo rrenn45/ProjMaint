@@ -50,6 +50,20 @@
       "when": 1724846055004,
       "tag": "0006_smart_shriek",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1724846340558,
+      "tag": "0007_uneven_hulk",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1724846693782,
+      "tag": "0008_closed_archangel",
+      "breakpoints": true
     }
   ]
 }

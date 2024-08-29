@@ -46,3 +46,6 @@ export type SelectWorkOrder = typeof workOrderTable.$inferSelect;
 export type InsertAsset = typeof assetTable.$inferInsert;
 export type SelectAsset = typeof assetTable.$inferSelect;
 
+export type InsertLocation = typeof locationsTable.$inferInsert;
+export type SelectLocation = typeof locationsTable.$inferSelect;
+
