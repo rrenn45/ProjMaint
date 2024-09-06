@@ -1,0 +1,1 @@
+ALTER TABLE "asset_table" ADD COLUMN "asset_criticality" integer;

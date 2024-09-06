@@ -32,6 +32,7 @@ const formSchema = z.object({
   }),
   work_group:z.string().min(2),
   impact_category:z.string().min(2),
+  asset:z.string(),
 })
 
 export function WorkOrderForm() {
@@ -42,6 +43,7 @@ export function WorkOrderForm() {
       workorder_descript: "",
       work_group:"",
       impact_category:"",
+      asset:"",
     },
   })
 
@@ -77,7 +79,7 @@ export function WorkOrderForm() {
             <FormItem>
               <FormLabel>Work Group</FormLabel>
               <FormControl>
-              <Select>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select a work group" />
       </SelectTrigger>
@@ -107,7 +109,7 @@ export function WorkOrderForm() {
             <FormItem>
               <FormLabel>Impact Category</FormLabel>
               <FormControl>
-              <Select>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
       <SelectTrigger className="w-[180px]">
         <SelectValue placeholder="Select an impact category" />
       </SelectTrigger>

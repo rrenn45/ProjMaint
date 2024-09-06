@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { createAsset } from "@/app/functions/actions"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -27,36 +28,40 @@ import {
 } from "@/components/ui/select"
 
 const formSchema = z.object({
-  asset_descript: z.string().min(10, {
+  asset_description: z.string().min(10, {
     message: "Description must be at least 10 characters.",
   }),
-  asset_class:z.string().min(2),
-  asset_category:z.string().min(2),
+  asset_class:z.string(),
+  location_id:z.string(),
+  asset_status: z.string(),
 })
 
-export function AssetForm() {
+export function AssetForm({data} : {data: {
+  area: string;
+  field: string;
+  location_id: string | null;
+  district: string;
+}[]}) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      asset_descript: "",
-      asset_class:"",
-      asset_category:"",
-    },
+    
   })
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
+    createAsset(values)
     console.log(values)
+
   }
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 m-4">
         <FormField
           control={form.control}
-          name="asset_descript"
+          name="asset_description"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Asset Description</FormLabel>
@@ -77,9 +82,9 @@ export function AssetForm() {
             <FormItem>
               <FormLabel>Asset Class</FormLabel>
               <FormControl>
-              <Select>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select an asset class" />
+        <SelectValue placeholder="Select a class" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
@@ -102,29 +107,57 @@ export function AssetForm() {
         />
         <FormField
           control={form.control}
-          name="asset_category"
+          name="asset_status"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Asset Category</FormLabel>
+              <FormLabel>Asset Status</FormLabel>
               <FormControl>
-              <Select>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
       <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder="Select an asset category" />
+        <SelectValue placeholder="Select a status" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>
-          <SelectLabel>Asset Categories</SelectLabel>
-          <SelectItem value="pump">Pump</SelectItem>
-          <SelectItem value="compressor">Compressor</SelectItem>
-          <SelectItem value="production_well">Production well</SelectItem>
-          <SelectItem value="injection_well">Injection well</SelectItem>
-          
+          <SelectLabel>Asset Statuses</SelectLabel>
+          <SelectItem value="operating">Operating</SelectItem>
+          <SelectItem value="inactive">Inactive</SelectItem>
+          <SelectItem value="not_ready">Not ready</SelectItem>
+          <SelectItem value="decommissioned">Decommissioned</SelectItem>
+          <SelectItem value="ta">TA</SelectItem>
         </SelectGroup>
       </SelectContent>
     </Select>
               </FormControl>
               <FormDescription>
                 Asset Description.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="location_id"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Asset Location</FormLabel>
+              <FormControl>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
+      <SelectTrigger className="w-[180px]">
+        <SelectValue placeholder="Select location" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectGroup>
+          <SelectLabel>Asset Locations</SelectLabel>
+        
+          {data.map((item) => <SelectItem key={item.location_id} value={item.area}>{item.field} {item.area}</SelectItem>)}
+          
+        </SelectGroup>
+      </SelectContent>
+    </Select>
+              </FormControl>
+              <FormDescription>
+                Asset Location.
               </FormDescription>
               <FormMessage />
             </FormItem>

@@ -23,14 +23,14 @@ export const workOrderTable = pgTable('work_order_table',{
 export const assetTable = pgTable('asset_table',{
   id: serial('id').primaryKey(),
   asset_description: text('asset_description').notNull(),
-  asset_class: text('asset_class').notNull(),
-  asset_criticality: integer('asset_criticality').notNull(),
-  location_id: integer('location_id').notNull().references(() => locationsTable.id),
+  asset_class: text('asset_class'),
+  asset_status: text('asset_status'),
+  location_id: text('location_id').references(() => locationsTable.location_id),
 
 })
 
 export const locationsTable = pgTable('location_table',{
-  id:serial('id').primaryKey(),
+  location_id:text('location_id').unique(),
   district: text('district').notNull(),
   field: text('field').notNull(),
   area:text('area').notNull(),

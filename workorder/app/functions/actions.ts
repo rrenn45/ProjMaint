@@ -5,7 +5,7 @@ import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
 import { randomUUID } from "crypto"
 import { db } from "@/db"
-import { InsertUser, usersTable } from "@/schema"
+import { InsertUser, usersTable, InsertAsset, assetTable, InsertWorkOrder, workOrderTable } from "@/schema"
 import { title } from "process"
 
 type asset = string
@@ -21,7 +21,7 @@ export async function rawUserData(formData: FormData){
     await createUser(user)
 }  
 
-export async function createWorkOrder(formData: FormData){
+/* export async function createWorkOrder(formData: FormData){
     //console.log(formData)
     const id = randomUUID()
     const sql = neon(process.env.DATABASE_URL as string)
@@ -34,9 +34,11 @@ export async function createWorkOrder(formData: FormData){
     revalidatePath('/work_orders')
     redirect('/work_orders')
 
-}
+} */
 
-export async function createAsset(formData: FormData){
+
+
+/*export async function createAsset(formData: FormData){
     const sql = neon(process.env.DATABASE_URL as string)
     const name = formData.get("name")
     const location = formData.get("location")
@@ -47,4 +49,14 @@ export async function createAsset(formData: FormData){
     revalidatePath('/assets')
     redirect('/assets')
 
+} */
+
+export async function createAsset(data: InsertAsset){
+    await db.insert(assetTable).values(data)
+    revalidatePath('/assets')
+    redirect('/assets')
+}
+
+export async function createWO(data: InsertWorkOrder){
+    await db.insert(workOrderTable).values(data)
 }
