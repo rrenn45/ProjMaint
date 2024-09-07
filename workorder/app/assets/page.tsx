@@ -13,7 +13,7 @@ import {
   import AssetSearch from "./assetSearch";
 
   import Link from "next/link"
-  import { eq, like, ilike } from "drizzle-orm";
+  import { eq, like, ilike, or } from "drizzle-orm";
   import { neon } from "@neondatabase/serverless";
   import { revalidatePath } from "next/cache";
   import { db } from "@/db";
@@ -21,14 +21,14 @@ import { assetTable, locationsTable } from "@/schema";
 
   async function getData(query:string) {
     
-    const response = await db.select().from(assetTable).innerJoin(locationsTable, eq(assetTable.location_id, locationsTable.area)).where(ilike(assetTable.asset_description, `%${query}%`));
+    const response = await db.select().from(assetTable).innerJoin(locationsTable, eq(assetTable.location_id, locationsTable.area)).where(or(ilike(assetTable.asset_description, `%%${query}%%`), ilike(assetTable.location_id, `%%${query}%%`)));
     
     return response
   }
 
 export default async function AssetPage({searchParams}: {searchParams?:{query?: string}}){
 
-    const query = searchParams?.query || '';
+    const query = searchParams?.query || ' ';
 
     const data = await getData(query)   
     console.log(data)
@@ -40,8 +40,9 @@ export default async function AssetPage({searchParams}: {searchParams?:{query?: 
     <TableCell>{item.asset_table.asset_status}</TableCell>
   </TableRow>)
 
+
     return(<div className="flex flex-col border w-full"><div className="flex justify-right border w-full">
-      
+          <p>{rows.length}</p>
       <Link className="p-2 border bg-orange-200 font-bold rounded m-4" href="/assets/create">Create Asset</Link></div>
       <AssetSearch placeholder="Search assets..." />
       <Table>

@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
+import { createWO } from "@/app/functions/actions"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -35,7 +36,7 @@ const formSchema = z.object({
   asset:z.string(),
 })
 
-export function WorkOrderForm() {
+export function WorkOrderForm({asset}:{asset:string}) {
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -55,13 +56,13 @@ export function WorkOrderForm() {
   }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 m-4">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-2 border h-full w-1/4">
         <FormField
           control={form.control}
           name="workorder_descript"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Work Order Description</FormLabel>
+              <FormLabel>Create Work Order for {asset}</FormLabel>
               <FormControl>
                 <Textarea placeholder="Describe details here..." {...field} />
               </FormControl>

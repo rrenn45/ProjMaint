@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { createAsset } from "@/app/functions/actions"
+import { SubmitButton } from "@/mycomponents/customButton"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -42,6 +43,9 @@ export function AssetForm({data} : {data: {
   location_id: string | null;
   district: string;
 }[]}) {
+  
+  const fields = data.map((item) => <SelectItem key={item.location_id} value={item.area}>{item.field} {item.area}</SelectItem>)
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -150,8 +154,11 @@ export function AssetForm({data} : {data: {
         <SelectGroup>
           <SelectLabel>Asset Locations</SelectLabel>
         
-          {data.map((item) => <SelectItem key={item.location_id} value={item.area}>{item.field} {item.area}</SelectItem>)}
+        {/*  {data.map((item) => <SelectItem key={item.location_id} value={item.area}>{item.field} {item.area}</SelectItem>)}    */}
           
+          {fields}
+      
+
         </SelectGroup>
       </SelectContent>
     </Select>
@@ -163,7 +170,7 @@ export function AssetForm({data} : {data: {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <SubmitButton/>
       </form>
     </Form>
   )

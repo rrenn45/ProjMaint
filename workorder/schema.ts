@@ -30,7 +30,7 @@ export const assetTable = pgTable('asset_table',{
 })
 
 export const locationsTable = pgTable('location_table',{
-  location_id:text('location_id').unique(),
+  location_id:text('location_id').unique().primaryKey(),
   district: text('district').notNull(),
   field: text('field').notNull(),
   area:text('area').notNull(),
