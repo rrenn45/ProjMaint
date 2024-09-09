@@ -42,11 +42,11 @@ export default async function AssetPage({searchParams}: {searchParams?:{query?: 
 
 
     return(<div className="flex flex-col border w-full"><div className="flex justify-right border w-full">
-          <p>{rows.length}</p>
+          
       <Link className="p-2 border bg-orange-200 font-bold rounded m-4" href="/assets/create">Create Asset</Link></div>
-      <AssetSearch placeholder="Search assets..." />
+      <AssetSearch placeholder="Search assets..." /> 
       <Table>
-        <TableCaption>A list of your assets.</TableCaption>
+        <TableCaption>{rows.length} Assets filtered.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Asset Name</TableHead>
