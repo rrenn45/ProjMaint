@@ -37,8 +37,8 @@ export const locationsTable = pgTable('location_table',{
 })
 
 
-//export type InsertUser = typeof usersTable.$inferInsert;
-//export type SelectUser = typeof usersTable.$inferSelect;
+export type InsertUser = typeof usersTable.$inferInsert;
+export type SelectUser = typeof usersTable.$inferSelect;
 
 export type InsertWorkOrder = typeof workOrderTable.$inferInsert;
 export type SelectWorkOrder = typeof workOrderTable.$inferSelect;
