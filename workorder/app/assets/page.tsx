@@ -31,7 +31,7 @@ export default async function AssetPage({searchParams}: {searchParams?:{query?: 
     const query = searchParams?.query || ' ';
 
     const data = await getData(query)   
-    console.log(data)
+    //console.log(data)
     const rows = data.map((item) => <TableRow key={item.asset_table.id}>
     <TableCell className="font-medium"><Link href={`/assets/${item.asset_table.id}`} className="hover:font-bold text-blue-600">{item.asset_table.asset_description}</Link></TableCell>
     <TableCell>{item.location_table.field}</TableCell>

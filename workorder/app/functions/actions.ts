@@ -59,4 +59,6 @@ export async function createAsset(data: InsertAsset){
 
 export async function createWO(data: InsertWorkOrder){
     await db.insert(workOrderTable).values(data)
+    revalidatePath('/work_orders')
+    redirect('/work_orders')
 }

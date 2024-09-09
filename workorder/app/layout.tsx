@@ -42,7 +42,7 @@ export default function RootLayout({
           <Link href="/assets" className="hover:text-blue-700">Assets</Link>
           <Link href="/users" className="hover:text-blue-700">Users</Link> */}
           <Links/>
-        {/* <SignedOut>
+        <SignedOut>
             <SignInButton><button className="bg-blue-500 text-white py-2 px-4 rounded">Sign in</button></SignInButton>
           </SignedOut>
           <SignedIn>
@@ -51,7 +51,7 @@ export default function RootLayout({
                 formButtonPrimary: 'bg-slate-500 hover:bg-slate-400 text-sm',
               },
             }} />
-          </SignedIn> */}
+          </SignedIn> 
         </div>
         {children}
         </div>

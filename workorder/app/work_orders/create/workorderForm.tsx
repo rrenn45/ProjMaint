@@ -4,6 +4,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 import { createWO } from "@/app/functions/actions"
+import { useAuth, useUser } from "@clerk/nextjs"
+
 
 import { Button } from "@/components/ui/button"
 import {
@@ -28,41 +30,51 @@ import {
 } from "@/components/ui/select"
 
 const formSchema = z.object({
-  workorder_descript: z.string().min(10, {
+  brief_description: z.string().min(10, {
     message: "Description must be at least 10 characters.",
   }),
-  work_group:z.string().min(2),
-  impact_category:z.string().min(2),
-  asset:z.string(),
+  work_order_type:z.string().min(2),
+  work_category:z.string().min(2),
+  
 })
 
-export function WorkOrderForm({asset}:{asset:string}) {
+interface Props {
+  dataHeader: {
+    assetId:number;
+    username?:string;
+  }
+}
+
+export const WorkOrderForm: FC<Props> = ({
+  dataHeader: {assetId, username},}) => {
+    console.log(username)
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      workorder_descript: "",
-      work_group:"",
-      impact_category:"",
-      asset:"",
-    },
+   
   })
+
+  
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
+    const createWOwithAssetIdAndUser = createWO.bind(null, {...values, priority_category: "urgent", asset_id:assetId, requested_by: username})
+    console.log(values)
+    //createWO({...values, asset_id:11, priority_category:"concern", requested_by:username})
+    createWOwithAssetIdAndUser()
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
+    
   }
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-2 border h-full w-1/4">
         <FormField
           control={form.control}
-          name="workorder_descript"
+          name="brief_description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Create Work Order for {asset}</FormLabel>
+              <FormLabel>Create Work Order</FormLabel>
               <FormControl>
                 <Textarea placeholder="Describe details here..." {...field} />
               </FormControl>
@@ -75,7 +87,7 @@ export function WorkOrderForm({asset}:{asset:string}) {
         />
         <FormField
           control={form.control}
-          name="work_group"
+          name="work_order_type"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Work Group</FormLabel>
@@ -97,7 +109,7 @@ export function WorkOrderForm({asset}:{asset:string}) {
     </Select>
               </FormControl>
               <FormDescription>
-                Work Order Description.
+                
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -105,7 +117,7 @@ export function WorkOrderForm({asset}:{asset:string}) {
         />
         <FormField
           control={form.control}
-          name="impact_category"
+          name="work_category"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Impact Category</FormLabel>
@@ -126,9 +138,7 @@ export function WorkOrderForm({asset}:{asset:string}) {
       </SelectContent>
     </Select>
               </FormControl>
-              <FormDescription>
-                Work Order Description.
-              </FormDescription>
+           
               <FormMessage />
             </FormItem>
           )}

@@ -1,7 +1,7 @@
-import { usersTable } from "@/schema"
+/*import { usersTable } from "@/schema"
 import { createUser, rawUserData } from "../functions/actions"
 import { db } from "@/db"
-import { getUserWorkOrders } from "@/lib/data" 
+import { getUserWorkOrders } from "@/lib/data"   */
 
 export default async function UsersPage(){
     const result = await db.select().from(usersTable)
@@ -21,3 +21,5 @@ export default async function UsersPage(){
             {orders.map((item) => <p key={item.id}>Description: {item.brief_description} Category: {item.work_category} Type: {item.work_order_type} Created On: {item.createdAt.toDateString()}</p>)}
     </div>)
 }
+
+*/

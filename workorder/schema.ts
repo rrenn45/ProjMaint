@@ -1,12 +1,12 @@
 import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 
-export const usersTable = pgTable('users_table', {
-  id: serial('id').primaryKey(),
+/*export const usersTable = pgTable('users_table', {
+  id: text('id').primaryKey(),
   name: text('name').notNull(),
   jobFunction: text('jobFunction').notNull(),
   email: text('email').notNull().unique(),
   
-});
+});  */
 
 export const workOrderTable = pgTable('work_order_table',{
   id: serial('id').primaryKey(),
@@ -14,9 +14,9 @@ export const workOrderTable = pgTable('work_order_table',{
   work_order_type: text('work_order_type').notNull(),
   work_category: text('work_category').notNull(),
   priority_category: text('priority_category').notNull(),
-  created_by: integer('created_by').notNull().references(() => usersTable.id,),
+  requested_by:text('requested_by'),
   createdAt: timestamp('created_at').notNull().defaultNow(),
-  updatedAt:timestamp('updated_at').notNull().$onUpdate(() => new Date()),
+  updatedAt:timestamp('updated_at').$onUpdate(() => new Date()).defaultNow(),
   asset_id: integer('asset_id').notNull().references(() => assetTable.id)
 });
 
@@ -37,8 +37,8 @@ export const locationsTable = pgTable('location_table',{
 })
 
 
-export type InsertUser = typeof usersTable.$inferInsert;
-export type SelectUser = typeof usersTable.$inferSelect;
+//export type InsertUser = typeof usersTable.$inferInsert;
+//export type SelectUser = typeof usersTable.$inferSelect;
 
 export type InsertWorkOrder = typeof workOrderTable.$inferInsert;
 export type SelectWorkOrder = typeof workOrderTable.$inferSelect;

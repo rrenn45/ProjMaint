@@ -1,0 +1,1 @@
+ALTER TABLE "work_order_table" ALTER COLUMN "updated_at" DROP NOT NULL;
