@@ -45,7 +45,7 @@ const ITEMS_PER_PAGE = 6;
   }
 } */
 
-export async function getUserWorkOrders(id: SelectUser['id']): Promise<
+/* export async function getUserWorkOrders(id: SelectUser['id']): Promise<
   Array<{
     id: number;
     brief_description: string;
@@ -56,4 +56,4 @@ export async function getUserWorkOrders(id: SelectUser['id']): Promise<
   }>
   >{
     return  db.select().from(workOrderTable).where(eq(workOrderTable.created_by, id));
-  }
+  }  */
