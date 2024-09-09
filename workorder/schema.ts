@@ -1,12 +1,12 @@
 import { integer, pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 
-/*export const usersTable = pgTable('users_table', {
+export const usersTable = pgTable('users_table', {
   id: text('id').primaryKey(),
   name: text('name').notNull(),
   jobFunction: text('jobFunction').notNull(),
   email: text('email').notNull().unique(),
   
-});  */
+});  
 
 export const workOrderTable = pgTable('work_order_table',{
   id: serial('id').primaryKey(),
