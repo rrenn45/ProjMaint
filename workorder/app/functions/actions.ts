@@ -5,8 +5,9 @@ import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
 import { randomUUID } from "crypto"
 import { db } from "@/db"
-import { InsertUser, usersTable, InsertAsset, assetTable, InsertWorkOrder, workOrderTable } from "@/schema"
+import { InsertUser, usersTable, InsertAsset, assetTable, InsertWorkOrder, workOrderTable, SelectWorkOrder } from "@/schema"
 import { title } from "process"
+import { eq } from "drizzle-orm"
 
 type asset = string
 
@@ -51,4 +52,12 @@ export async function createWO(data: InsertWorkOrder){
     await db.insert(workOrderTable).values(data)
     revalidatePath('/work_orders')
     redirect('/work_orders')
+}
+
+
+
+export async function updatePost(id: SelectWorkOrder['id'], data: Partial<Omit<SelectWorkOrder, 'id'>>) {
+  await db.update(workOrderTable).set(data).where(eq(workOrderTable.id, id));
+  revalidatePath('/work_orders')
+  redirect('/work_orders')
 }
