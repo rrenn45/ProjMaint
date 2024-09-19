@@ -14,7 +14,7 @@ export function Links() {
 </Link>
           <Link href='/work_orders' className={`${pathname === '/work_orders' ? 'text-blue-700 font-bold border rounded p-2' : 'font-bold hover:text-blue-700'}`}>Work Orders</Link>
           <Link href="/assets" className={`${pathname === '/assets' ? 'text-blue-700 font-bold border rounded p-2' : 'font-bold hover:text-blue-700'}`}>Assets</Link>
-          <Link href="/users" className={`${pathname === '/users' ? 'text-blue-700 font-bold border rounded p-2' : 'font-bold hover:text-blue-700'}`}>Users</Link>  
+          <Link href="/dashboard" className={`${pathname === '/dashboard' ? 'text-blue-700 font-bold border rounded p-2' : 'font-bold hover:text-blue-700'}`}>Dashboard</Link>  
      
     </>
   )

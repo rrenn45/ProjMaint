@@ -10,6 +10,8 @@ import {
   UserButton
 } from '@clerk/nextjs'
 
+import {auth, currentUser} from '@clerk/nextjs/server'
+
 import { Links } from "@/mycomponents/navLinks";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -19,11 +21,12 @@ export const metadata: Metadata = {
   description: "Simplifying Work Order Generation",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await currentUser()
   return (
     <ClerkProvider appearance={{
       elements: {
@@ -46,6 +49,7 @@ export default function RootLayout({
             <SignInButton><button className="bg-blue-500 text-white py-2 px-4 rounded">Sign in</button></SignInButton>
           </SignedOut>
           <SignedIn>
+            Signed in as {user?.emailAddresses[0].emailAddress}
             <UserButton appearance={{
               elements: {
                 formButtonPrimary: 'bg-slate-500 hover:bg-slate-400 text-sm',

@@ -75,7 +75,7 @@ export const WorkOrderForm: FC<Props> = ({
           name="brief_description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Create Work Order</FormLabel>
+              <FormLabel className="text-xl">Create Work Order</FormLabel>
               <FormControl>
                 <Textarea placeholder="Describe details here..." {...field} />
               </FormControl>

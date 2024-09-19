@@ -34,10 +34,13 @@ export default async function WorkOrderPage({searchParams}: {searchParams?:{quer
     const rows = data.map((item) => <TableRow key={item.work_order_table.id}>
     <TableCell className="font-medium"><Link href={`/work_orders/${item.work_order_table.id}`} className="hover:font-bold text-blue-600">{item.work_order_table.id}</Link></TableCell>
     <TableCell>{item.work_order_table.brief_description}</TableCell>
+    <TableCell>{item.asset_table.asset_description}</TableCell>
     <TableCell>{item.work_order_table.work_order_type}</TableCell>
     <TableCell>{item.work_order_table.createdAt.toDateString()}</TableCell>
     <TableCell>{item.work_order_table.priority_category}</TableCell>
-    <TableCell className="text-right">{item.asset_table.asset_description}</TableCell>
+    <TableCell></TableCell>
+    <TableCell></TableCell>
+    <TableCell></TableCell>
     <TableCell><Link href={`/work_orders/${item.work_order_table.id}/modify`} className="hover:bg-slate-400 bg-slate-300 rounded p-2">Modify</Link></TableCell>
   </TableRow>)
 
@@ -49,10 +52,13 @@ export default async function WorkOrderPage({searchParams}: {searchParams?:{quer
           <TableRow>
             <TableHead className="w-[100px]">Work Order #</TableHead>
             <TableHead>Description</TableHead>
+            <TableHead>Asset</TableHead>
             <TableHead>Work Order Type</TableHead>
             <TableHead>Date Created</TableHead>
             <TableHead>Priority</TableHead>
-            <TableHead className="text-right">Asset</TableHead>
+            <TableHead>Assigned to</TableHead>
+            <TableHead>Status</TableHead>
+            <TableHead>Requested by</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

@@ -57,3 +57,9 @@ const ITEMS_PER_PAGE = 6;
   >{
     return  db.select().from(workOrderTable).where(eq(workOrderTable.created_by, id));
   }  */
+
+  export async function fetchWorkOrderById(id:number){
+    const wo = await db.select().from(workOrderTable).where(eq(workOrderTable.id, id))
+    const fields = wo[0]
+    return fields
+  }
