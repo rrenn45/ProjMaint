@@ -32,7 +32,7 @@ export default async function WorkOrderPage({searchParams}: {searchParams?:{quer
   const data = await getData(query)   
     //console.log(data)
     const rows = data.map((item) => <TableRow key={item.work_order_table.id}>
-    <TableCell className="font-medium"><Link href={`/work_orders/${item.work_order_table.id}`} className="hover:font-bold text-blue-600">{item.work_order_table.id}</Link></TableCell>
+    <TableCell className="font-medium"><Link href={`/work_orders/${item.work_order_table.id}/modify`} className="hover:font-bold text-blue-600">{item.work_order_table.id}</Link></TableCell>
     <TableCell>{item.work_order_table.brief_description}</TableCell>
     <TableCell>{item.asset_table.asset_description}</TableCell>
     <TableCell>{item.work_order_table.work_order_type}</TableCell>
@@ -41,7 +41,7 @@ export default async function WorkOrderPage({searchParams}: {searchParams?:{quer
     <TableCell></TableCell>
     <TableCell></TableCell>
     <TableCell></TableCell>
-    <TableCell><Link href={`/work_orders/${item.work_order_table.id}/modify`} className="hover:bg-slate-400 bg-slate-300 rounded p-2">Modify</Link></TableCell>
+   
   </TableRow>)
 
     return (<div className="flex flex-col border w-full"><div className="flex justify-right border w-full items-center"><Link className="p-2 border bg-orange-200 font-bold rounded m-4" href="/work_orders/create">Create WO</Link>

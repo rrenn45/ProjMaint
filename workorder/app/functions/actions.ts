@@ -8,6 +8,7 @@ import { db } from "@/db"
 import { InsertUser, usersTable, InsertAsset, assetTable, InsertWorkOrder, workOrderTable, SelectWorkOrder } from "@/schema"
 import { title } from "process"
 import { eq } from "drizzle-orm"
+import { unstable_noStore } from "next/cache"
 
 type asset = string
 
@@ -56,8 +57,9 @@ export async function createWO(data: InsertWorkOrder){
 
 
 
-export async function updatePost(id: SelectWorkOrder['id'], data: Partial<Omit<SelectWorkOrder, 'id'>>) {
+export async function updateWO(id: SelectWorkOrder['id'], data: Partial<Omit<SelectWorkOrder, 'id'>>) {
   await db.update(workOrderTable).set(data).where(eq(workOrderTable.id, id));
+  unstable_noStore()
   revalidatePath('/work_orders')
   redirect('/work_orders')
 }

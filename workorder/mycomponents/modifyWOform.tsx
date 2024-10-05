@@ -38,7 +38,7 @@ export function ModifyWOForm({workOrder}: {workOrder :{
   updatedAt: Date | null;
   asset_id: number;
 }}) {
-  console.log(workOrder)
+  //console.log(workOrder)
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -54,7 +54,7 @@ export function ModifyWOForm({workOrder}: {workOrder :{
   function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values)
+    console.log('hello')
   }
   return (
     <Form {...form}>
@@ -64,66 +64,18 @@ export function ModifyWOForm({workOrder}: {workOrder :{
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Description</FormLabel>
+              <FormLabel>Username</FormLabel>
               <FormControl>
                 <Input placeholder="shadcn" {...field} />
               </FormControl>
               <FormDescription>
-                Work order description.
+                This is your public display name.
               </FormDescription>
               <FormMessage />
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="type"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Work Group</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Choose craft type" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="electrical">electrical</SelectItem>
-                  <SelectItem value="mechanical">mechanical</SelectItem>
-                  <SelectItem value="facility_maintenance">facility maintenance</SelectItem>
-                  <SelectItem value="laborer">laborer</SelectItem>
-                </SelectContent>
-              </Select>
-              
-              <FormMessage />
-            </FormItem>
-          )}
-        /> 
-        <FormField
-          control={form.control}
-          name="category"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Impact Category</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="impact category" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="environmental">environmental</SelectItem>
-                  <SelectItem value="safety">safety</SelectItem>
-                  <SelectItem value="production">production</SelectItem>
-                  <SelectItem value="regulatory">regulatory</SelectItem>
-                </SelectContent>
-              </Select>
-              
-              <FormMessage />
-            </FormItem>
-          )}
-        /> 
-        <Button type="submit">Update</Button>
+        <Button type="submit">Submit</Button>
       </form>
     </Form>
   )
