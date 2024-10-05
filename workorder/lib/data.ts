@@ -4,6 +4,7 @@ import { SelectUser, workOrderTable } from '@/schema';
 import { db } from '@/db';
 import {asc, between, count, eq, getTableColumns, sql } from 'drizzle-orm'
 import { PgTimestampString } from 'drizzle-orm/pg-core';
+import { unstable_noStore } from 'next/cache';
 
 
 const ITEMS_PER_PAGE = 6;
@@ -59,6 +60,7 @@ const ITEMS_PER_PAGE = 6;
   }  */
 
   export async function fetchWorkOrderById(id:number){
+    unstable_noStore()
     const wo = await db.select().from(workOrderTable).where(eq(workOrderTable.id, id))
     const fields = wo[0]
     return fields
